@@ -1,3 +1,5 @@
+require "pry"
+
 def welcome
   # code #welcome here
 
@@ -29,10 +31,9 @@ end
 def get_user_input
   # code #get_user_input here
 
-#input = gets
+input = gets.chomp
 #return input
 
-gets.chomp
 
 end
 
@@ -49,7 +50,7 @@ def initial_round
 card_total = deal_card + deal_card
 
 display_card_total(card_total)
-
+#binding.pry
 return card_total
 
 end
@@ -86,25 +87,29 @@ def runner
 
 welcome
 
-first_hit = 0
-second_hit = 0
 total_hit = 0
+stay = false
 
-inital_total = initial_round
+total_hit = initial_round
 
-until total_hit == 21
 
-first_hit = hit?(inital_total)
+until total_hit >= 21 || stay == true
 
-if first_hit == inital_total
-  second_hit = hit?(inital_total)
+stay_check = total_hit
+total_hit = hit?(total_hit)
+
+if stay_check == total_hit
+  stay_check_again = total_hit
+  total_hit = hit?(total_hit)
+if stay_check_again = total_hit
+  stay = true
+end
 end
 
-total_hit = first_hit += second_hit
 
 puts "Your cards add up to #{total_hit}"
 end
 
 end_game(total_hit)
-
+exit
 end
